@@ -1,4 +1,4 @@
-# tikape-runko
+# Nahkaluola
 
-Tietokantojen perusteet -kurssilla tehtävän web-sovelluksen pohja.
+Nahkamiehille suunnattu suomalainen keskustelufoorumi.
 
