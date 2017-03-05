@@ -7,12 +7,11 @@
     </head>
 
     <body>
-        <h1>Kaikki Alueet!</h1>
-        
+        <h1>Kaikki Aiheet!</h1>
 
         <ul style="list-style-type:none">
-            <li th:each="alue: ${alueet}">
-                <a th:href="${'/' + alue.id}"> <span th:text="${alue.otsikko}"></span> </a> <span th:text="${alue.viestiMaara}">viestien määrä</span>
+            <li th:each="aihe: ${aiheet}">
+                <a th:href="${'/aihe/' + aihe.id}"> <span th:text="${aihe.otsikko}"></span> </a> <span th:text="${aihe.viestiMaara}">viestien määrä</span>
             </li>
         </ul>
     </body>

@@ -11,20 +11,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import tikape.runko.domain.Opiskelija;
+import tikape.runko.domain.Aihe;
 
-public class OpiskelijaDao implements Dao<Opiskelija, Integer> {
+
+public class AiheDao implements Dao<Aihe, Integer> {
 
     private Database database;
 
-    public OpiskelijaDao(Database database) {
+    public AiheDao(Database database) {
         this.database = database;
     }
-
+    
     @Override
-    public Opiskelija findOne(Integer key) throws SQLException {
+    public Aihe findOne(Integer key) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Opiskelija WHERE id = ?");
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Aihe WHERE Id_aihe = ?");
         stmt.setObject(1, key);
 
         ResultSet rs = stmt.executeQuery();
@@ -33,10 +34,11 @@ public class OpiskelijaDao implements Dao<Opiskelija, Integer> {
             return null;
         }
 
-        Integer id = rs.getInt("id");
-        String nimi = rs.getString("nimi");
+        Integer id = rs.getInt("Id_aihe");
+        Integer viestiMaara = 1;
+        String nimi = rs.getString("Nimi");
 
-        Opiskelija o = new Opiskelija(id, nimi);
+        Aihe o = new Aihe(id, viestiMaara, nimi);
 
         rs.close();
         stmt.close();
@@ -46,25 +48,30 @@ public class OpiskelijaDao implements Dao<Opiskelija, Integer> {
     }
 
     @Override
-    public List<Opiskelija> findAll() throws SQLException {
+    public List<Aihe> findAll() throws SQLException {
 
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Opiskelija");
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Aihe");
 
         ResultSet rs = stmt.executeQuery();
-        List<Opiskelija> opiskelijat = new ArrayList<>();
+        List<Aihe> aiheet = new ArrayList<>();
         while (rs.next()) {
-            Integer id = rs.getInt("id");
-            String nimi = rs.getString("nimi");
+            Integer id = rs.getInt("Id_aihe");
+            
+            PreparedStatement stmt2 = connection.prepareStatement("SELECT COUNT(Aihe) AS Maara FROM Viesti WHERE Aihe = ?");
+            stmt.setObject(1, id);
+            ResultSet rs2 = stmt2.executeQuery();
+            Integer viestiMaara = rs2.getInt("Maara");
+            String nimi = rs.getString("Nimi");
 
-            opiskelijat.add(new Opiskelija(id, nimi));
+            aiheet.add(new Aihe(id, viestiMaara, nimi));
         }
 
         rs.close();
         stmt.close();
         connection.close();
 
-        return opiskelijat;
+        return aiheet;
     }
 
     @Override

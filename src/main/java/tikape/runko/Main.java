@@ -5,33 +5,37 @@ import spark.ModelAndView;
 import static spark.Spark.*;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
 import tikape.runko.database.Database;
-import tikape.runko.database.OpiskelijaDao;
+import tikape.runko.database.AlueDao;
+import tikape.runko.database.AiheDao;
+import tikape.runko.database.ViestiDao;
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        Database database = new Database("jdbc:sqlite:opiskelijat.db");
+        Database database = new Database("jdbc:sqlite:nahkaluola.db");
         database.init();
-
-        OpiskelijaDao opiskelijaDao = new OpiskelijaDao(database);
+        
+        AlueDao alueDao = new AlueDao(database);
+        AiheDao aiheDao = new AiheDao(database);
+        ViestiDao viestiDao = new ViestiDao(database);
 
         get("/", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("viesti", "tervehdys");
+            map.put("alueet", alueDao.findAll());
 
             return new ModelAndView(map, "index");
         }, new ThymeleafTemplateEngine());
 
-        get("/opiskelijat", (req, res) -> {
+        get("/:alueid", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("opiskelijat", opiskelijaDao.findAll());
+            map.put("aiheet", aiheDao.findAll());
 
-            return new ModelAndView(map, "opiskelijat");
+            return new ModelAndView(map, "alue");
         }, new ThymeleafTemplateEngine());
 
-        get("/opiskelijat/:id", (req, res) -> {
+        get("/:alueid/:aiheid", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("opiskelija", opiskelijaDao.findOne(Integer.parseInt(req.params("id"))));
+            map.put("opiskelija", aiheDao.findOne(Integer.parseInt(req.params("aiheid"))));
 
             return new ModelAndView(map, "opiskelija");
         }, new ThymeleafTemplateEngine());
