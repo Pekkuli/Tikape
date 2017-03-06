@@ -22,7 +22,7 @@
 
     <body>
         <h1><span>Keskustelu</span>!</h1>
-
+        <p> <span class="laatikko">Viesti</span> <span class="laatikko" th:text="'Viestien määrä'">Kirjoittaja</span> <span class="laatikko" >Viestin aikaleima</span></p>
         <ul style="list-style-type:none">
             <li th:each="viesti: ${viestit}">
                 <span class='laatikko' th:text="${viesti.teksti}">viestin sisältö</span> <span class='laatikko' th:text="'t. ' + ${viesti.nimimerkki}">viestin kirjoittaja</span> <span class='laatikko' th:text="${viesti.paivays}">viestin päivämäärä</span>
@@ -30,10 +30,11 @@
         </ul>
         <br/>
         <br/>
+        <br/>
         <form method="post">
             <textarea rows="10" style="margin-top: 10px; margin-bottom: 10px; margin-left: 90px;" name="viestiTeksti"></textarea>
             <br/>
-            Nimimerkki: <input type="text" th:field="*{content}" name="viestiNimimerkki" />
+            Nimimerkki: <input type="text" name="viestiNimimerkki" />
             <button type="submit">Lähetä</button>
         </form>
     </body>

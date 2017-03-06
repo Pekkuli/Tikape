@@ -13,6 +13,13 @@ public class Aihe {
         this.otsikko = otsikko;
         this.paivays = paivays;
     }
+    
+    public Aihe(Integer id, String otsikko) {
+        this.id = id;
+        this.viestiMaara = 1;
+        this.otsikko = otsikko;
+        this.paivays = "";
+    }
 
     public Integer getId() {
         return id;

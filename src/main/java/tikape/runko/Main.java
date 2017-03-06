@@ -8,6 +8,7 @@ import tikape.runko.database.Database;
 import tikape.runko.database.AlueDao;
 import tikape.runko.database.AiheDao;
 import tikape.runko.database.ViestiDao;
+import tikape.runko.domain.Aihe;
 
 public class Main {
 
@@ -32,7 +33,16 @@ public class Main {
 
             return new ModelAndView(map, "aiheet");
         }, new ThymeleafTemplateEngine());
+        
+        post("/:alueid", (req, res) -> {
+            Aihe aihe = aiheDao.uusiAihe(Integer.parseInt(req.params("alueid")), req.queryParams("aiheOtsikko"), req.queryParams("viestiTeksti"), req.queryParams("viestiNimimerkki"));
+            
+            HashMap map = new HashMap<>();
+            map.put("viestit", viestiDao.findAll(aihe.getId()));
 
+            return new ModelAndView(map, "viestit");
+        }, new ThymeleafTemplateEngine());
+        
         get("/aihe/:aiheid", (req, res) -> {
             HashMap map = new HashMap<>();
             map.put("viestit", viestiDao.findAll(Integer.parseInt(req.params("aiheid"))));

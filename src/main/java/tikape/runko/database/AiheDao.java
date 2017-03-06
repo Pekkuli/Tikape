@@ -82,6 +82,35 @@ public class AiheDao implements Dao<Aihe, Integer> {
 
         return aiheet;
     }
+    
+    public Aihe uusiAihe(Integer alueid, String otsikko, String teksti, String nimimerkki) throws SQLException {
+        if(!teksti.isEmpty() && !otsikko.isEmpty()){
+            if(nimimerkki.isEmpty()){
+                nimimerkki = "Anonyymi";
+            }
+            Connection connection = database.getConnection();
+            PreparedStatement stmt = connection.prepareStatement("INSERT INTO Aihe (Alue, Nimi) VALUES (?, ?);");
+            stmt.setObject(1, alueid);
+            stmt.setObject(2, otsikko);
+            stmt.executeUpdate();
+            stmt.close();
+            
+            stmt = connection.prepareStatement("SELECT Id_aihe FROM Aihe WHERE Nimi = ?");
+            stmt.setObject(1, otsikko);
+            ResultSet rs = stmt.executeQuery();
+            Integer aiheid = rs.getInt("Id_aihe");
+            stmt.close();
+            rs.close();
+            ViestiDao viesti = new ViestiDao(database);
+            viesti.uusiViesti(aiheid, teksti, nimimerkki);
+            
+            Aihe aihe = new Aihe(aiheid, otsikko);
+            connection.close();
+            return aihe;
+        }
+        Aihe aihe = new Aihe(1, otsikko);
+        return aihe;
+    }
 
     @Override
     public void delete(Integer key) throws SQLException {
