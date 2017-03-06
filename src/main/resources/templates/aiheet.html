@@ -1,8 +1,9 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
+	
     <head>
-        <title>Nahkaluola</title>
+        <title>NahkaLuola</title>
         <meta charset="utf-8" />
         <style>
             .laatikko { 
@@ -19,9 +20,11 @@
             }
         </style>
     </head>
-
+	
     <body>
-        <h1>Kaikki Aiheet!</h1>
+        <h1>Kaikki NahkaKeskustelut!</h1>
+
+        <p> <span class="laatikko">NahkaAlue</span> <span class="laatikko" th:text="'NahkaViestien m&#228;&#228;r&#228;'">Viestien määrä</span> <span class="laatikko" >Viimeisin NahkaViesti</span></p>
 
         <ul style="list-style-type:none">
             <li th:each="aihe: ${aiheet}">
