@@ -16,11 +16,11 @@ public class Alue {
     private String otsikko;
     private String paivays;
 
-    public Alue(Integer id, Integer viesteja, String otsikko) {
+    public Alue(Integer id, Integer viesteja, String otsikko, String paivays) {
         this.id = id;
         this.viestiMaara = viesteja;
         this.otsikko = otsikko;
-        this.paivays = "1.1.2017";
+        this.paivays = paivays;
     }
 
     public Integer getId() {
@@ -45,6 +45,14 @@ public class Alue {
 
     public void setOtsikko(String otsikko) {
         this.otsikko = otsikko;
+    }
+    
+    public String getPaivays(){
+        return paivays;
+    }
+    
+    public void setPaivays(String paivays){
+        this.paivays = paivays;
     }
     
 }

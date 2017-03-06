@@ -38,7 +38,7 @@ public class AiheDao implements Dao<Aihe, Integer> {
         Integer viestiMaara = 1;
         String nimi = rs.getString("Nimi");
 
-        Aihe o = new Aihe(id, viestiMaara, nimi);
+        Aihe o = new Aihe(id, viestiMaara, nimi, "1991");
 
         rs.close();
         stmt.close();
@@ -48,10 +48,11 @@ public class AiheDao implements Dao<Aihe, Integer> {
     }
 
     @Override
-    public List<Aihe> findAll() throws SQLException {
+    public List<Aihe> findAll(Integer key) throws SQLException {
 
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Aihe");
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Aihe WHERE Alue = ?");
+        stmt.setObject(1, key);
 
         ResultSet rs = stmt.executeQuery();
         List<Aihe> aiheet = new ArrayList<>();
@@ -59,12 +60,20 @@ public class AiheDao implements Dao<Aihe, Integer> {
             Integer id = rs.getInt("Id_aihe");
             
             PreparedStatement stmt2 = connection.prepareStatement("SELECT COUNT(Aihe) AS Maara FROM Viesti WHERE Aihe = ?");
-            stmt.setObject(1, id);
+            stmt2.setObject(1, id);
             ResultSet rs2 = stmt2.executeQuery();
             Integer viestiMaara = rs2.getInt("Maara");
             String nimi = rs.getString("Nimi");
-
-            aiheet.add(new Aihe(id, viestiMaara, nimi));
+            
+            PreparedStatement stmt3 = connection.prepareStatement("SELECT MAX(Aika) AS Aika FROM Viesti WHERE Aihe = ?");
+            stmt3.setObject(1, id);
+            ResultSet rs3 = stmt3.executeQuery();
+            
+            String paivays = rs3.getString("Aika");
+            aiheet.add(new Aihe(id, viestiMaara, nimi, paivays));
+            
+            rs2.close();
+            stmt2.close();
         }
 
         rs.close();

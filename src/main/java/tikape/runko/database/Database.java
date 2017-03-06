@@ -39,28 +39,35 @@ public class Database {
         ArrayList<String> lista = new ArrayList<>();
 
         // tietokantataulujen luomiseen tarvittavat komennot suoritusjärjestyksessä
-        lista.add("DROP TABLE Alue;");
-        lista.add("DROP TABLE Aihe;");
-        lista.add("DROP TABLE Viesti;");
+//        lista.add("DROP TABLE Alue;");
+//        lista.add("DROP TABLE Aihe;");
+//        lista.add("DROP TABLE Viesti;");
+//
+//        lista.add("CREATE TABLE Alue (Id_alue INTEGER NOT NULL PRIMARY KEY, Nimi VARCHAR(255));");
+//        lista.add("CREATE TABLE Aihe (Id_aihe INTEGER NOT NULL PRIMARY KEY, Alue INTEGER, Nimi VARCHAR(255), FOREIGN KEY(Alue) REFERENCES Alue(Id_alue));");
+//        lista.add("CREATE TABLE Viesti (Aihe INTEGER, Teksti VARCHAR(255), Nimimerkki VARCHAR(255), Aika DATETIME DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY(Aihe) REFERENCES Aihe(Id_aihe));");
+//        
+//        lista.add("INSERT INTO Alue (Nimi) VALUES ('Ohjelmointi');");
+//        lista.add("INSERT INTO Alue (Nimi) VALUES ('Toinen');");
+//        lista.add("INSERT INTO Alue (Nimi) VALUES ('Kolmas');");
+//        
+//        lista.add("INSERT INTO Aihe (Alue, Nimi) VALUES (1, 'Python op');");
+//        lista.add("INSERT INTO Aihe (Alue, Nimi) VALUES (1, 'Java paras');");
+//        lista.add("INSERT INTO Aihe (Alue, Nimi) VALUES (2, 'Ret');");
+//        lista.add("INSERT INTO Aihe (Alue, Nimi) VALUES (3, 'git gud');");
+        
+//        lista.add("INSERT INTO Viesti (Aihe, Teksti, Nimimerkki) VALUES (1, 'Python on kyl paras kieli', 'Homeros');");
+//        lista.add("INSERT INTO Viesti (Aihe, Teksti, Nimimerkki) VALUES (1, 'Ei ole', 'Mutsis');");
+//        lista.add("INSERT INTO Viesti (Aihe, Teksti, Nimimerkki) VALUES (1, 'Kyl on', 'Faijas');");
+//        lista.add("INSERT INTO Viesti (Aihe, Teksti, Nimimerkki) VALUES (2, 'Python on kyl paras kieli2', 'Homeros');");
+//        lista.add("INSERT INTO Viesti (Aihe, Teksti, Nimimerkki) VALUES (3, 'Python on kyl paras kieli3', 'Homeros');");
+//        lista.add("INSERT INTO Viesti (Aihe, Teksti, Nimimerkki) VALUES (4, 'Python on kyl paras kieli4', 'Homeros');");
 
-        lista.add("CREATE TABLE Alue (Id_alue INTEGER NOT NULL PRIMARY KEY, Nimi VARCHAR(255));");
-        lista.add("CREATE TABLE Aihe (Id_aihe INTEGER NOT NULL PRIMARY KEY, Alue INTEGER, Nimi VARCHAR(255), FOREIGN KEY(Alue) REFERENCES Alue(Id_alue));");
-        lista.add("CREATE TABLE Viesti (Aihe INTEGER, Teksti VARCHAR(255), Nimimerkki VARCHAR(255), Aika DATETIME DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY(Aihe) REFERENCES Aihe(Id_aihe));");
+//        lista.add("INSERT INTO Viesti (Aihe, Teksti, Nimimerkki) VALUES (1, 'ahhah ez', 'auto');");
+//        lista.add("INSERT INTO Viesti (Aihe, Teksti, Nimimerkki) VALUES (2, 'lähettäkää apua ;)', 'tietokone');");
+//        lista.add("INSERT INTO Viesti (Aihe, Teksti, Nimimerkki) VALUES (3, 'ei nyt taas', 'polkupyörä');");
+//        lista.add("INSERT INTO Viesti (Aihe, Teksti, Nimimerkki) VALUES (4, 'go fuk pls', 'peruna');");
         
-        
-        lista.add("INSERT INTO Alue (Nimi) VALUES ('Ohjelmointi');");
-        lista.add("INSERT INTO Alue (Nimi) VALUES ('Toinen');");
-        lista.add("INSERT INTO Alue (Nimi) VALUES ('Kolmas');");
-        lista.add("INSERT INTO Aihe (Alue, Nimi) VALUES (1, 'Python op');");
-        lista.add("INSERT INTO Aihe (Alue, Nimi) VALUES (2, 'Ret');");
-        lista.add("INSERT INTO Aihe (Alue, Nimi) VALUES (3, 'git gud');");
-        lista.add("INSERT INTO Viesti (Aihe, Teksti, Nimimerkki) VALUES (1, 'Python on kyl paras kieli', 'Homeros');");
-        lista.add("INSERT INTO Viesti (Aihe, Teksti, Nimimerkki) VALUES (1, 'Python on kyl paras kieli', 'Homeros');");
-        lista.add("INSERT INTO Viesti (Aihe, Teksti, Nimimerkki) VALUES (1, 'Python on kyl paras kieli', 'Homeros');");
-        lista.add("INSERT INTO Viesti (Aihe, Teksti, Nimimerkki) VALUES (2, 'Python on kyl paras kieli', 'Homeros');");
-        lista.add("INSERT INTO Viesti (Aihe, Teksti, Nimimerkki) VALUES (3, 'Python on kyl paras kieli', 'Homeros');");
-        
-
         return lista;
     }
 }

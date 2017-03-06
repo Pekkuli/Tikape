@@ -1,0 +1,34 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>Nahkaluola</title>
+        <meta charset="utf-8" />
+        <style>
+            .laatikko { 
+                float: left;
+                width: 150px;
+                margin: 15px;
+            }
+            li {
+                clear: left;
+                max-height: 5px;
+            }
+            p {
+                margin-left: 40px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>Kaikki Alueet!</h1>
+        
+        <p> <span class="laatikko">Alue</span> <span class="laatikko" th:text="'Viestien määrä'"></span> <span class="laatikko" >Viimeisin viesti</span></p>
+
+        <ul style="list-style-type:none">
+            <li th:each="alue: ${alueet}">
+                <a th:href="${'/' + alue.id}"> <span class='laatikko' th:text="${alue.otsikko}"></span> </a> <span class='laatikko' th:text="${alue.viestiMaara}">viestien määrä</span> <span class='laatikko' th:text="${alue.paivays}">viestin päivämäärä</span>
+            </li>
+        </ul>
+    </body>
+</html>

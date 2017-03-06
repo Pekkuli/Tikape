@@ -38,7 +38,7 @@ public class AlueDao implements Dao<Alue, Integer> {
         Integer viestiMaara = 1;
         String nimi = rs.getString("Nimi");
 
-        Alue o = new Alue(id, viestiMaara, nimi);
+        Alue o = new Alue(id, viestiMaara, nimi, "");
 
         rs.close();
         stmt.close();
@@ -46,8 +46,12 @@ public class AlueDao implements Dao<Alue, Integer> {
 
         return o;
     }
+    
+    public List <Alue> findAll(Integer key) throws SQLException {
+        List<Alue> alueet = new ArrayList<>();
+        return alueet;
+    }
 
-    @Override
     public List<Alue> findAll() throws SQLException {
 
         Connection connection = database.getConnection();
@@ -58,7 +62,7 @@ public class AlueDao implements Dao<Alue, Integer> {
         while (rs.next()) {
             Integer id = rs.getInt("Id_alue");
             
-            PreparedStatement stmt2 = connection.prepareStatement("SELECT COUNT(Aihe) AS Maara FROM Viesti WHERE (SELECT Alue FROM Aihe JOIN Viesti ON Viesti.Aihe=Aihe.Id_aihe) = ?");
+            PreparedStatement stmt2 = connection.prepareStatement("SELECT COUNT(Aihe) AS Maara FROM (SELECT Aihe FROM Aihe JOIN Viesti ON Aihe.Id_aihe=Viesti.Aihe WHERE Alue = ?)");
             stmt2.setObject(1, id);
             ResultSet rs2 = stmt2.executeQuery();
             Integer viestiMaara = rs2.getInt("Maara");
@@ -67,13 +71,14 @@ public class AlueDao implements Dao<Alue, Integer> {
             
             String nimi = rs.getString("Nimi");
             
-//            PreparedStatement stmt3 = connection.prepareStatement("SELECT Aihe, Aika FROM Viesti JOIN Aihe ON Viesti.Aihe=Aihe.Id_aihe ORDER BY max(Aika)");
-//            ResultSet rs3 = stmt3.executeQuery();
-//            String paivays = rs3.getString("Aika");
-//            rs3.close();
-//            stmt3.close();
+            PreparedStatement stmt3 = connection.prepareStatement("SELECT MAX(Aika) AS Aika FROM (SELECT Aika FROM Aihe JOIN Viesti ON Aihe.Id_aihe=Viesti.Aihe WHERE Alue = ?)");
+            stmt3.setObject(1, id);
+            ResultSet rs3 = stmt3.executeQuery();
+            String paivays = rs3.getString("Aika");
+            rs3.close();
+            stmt3.close();
 
-            alueet.add(new Alue(id, viestiMaara, nimi));
+            alueet.add(new Alue(id, viestiMaara, nimi, paivays));
         }
 
         rs.close();

@@ -36,8 +36,9 @@ public class ViestiDao implements Dao<Viesti, Integer> {
         Integer id = rs.getInt("Aihe");
         String teksti = rs.getString("Teksti");
         String nimimerkki = rs.getString("Nimimerkki");
+        String paivays = rs.getString("Aika");
 
-        Viesti o = new Viesti(id, teksti, nimimerkki);
+        Viesti o = new Viesti(id, teksti, nimimerkki, paivays);
 
         rs.close();
         stmt.close();
@@ -47,25 +48,26 @@ public class ViestiDao implements Dao<Viesti, Integer> {
     }
 
     @Override
-    public List<Viesti> findAll() throws SQLException {
+    public List<Viesti> findAll(Integer key) throws SQLException {
 
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Viesti");
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Viesti WHERE Viesti.Aihe = ?");
+        stmt.setObject(1, key);
 
         ResultSet rs = stmt.executeQuery();
         List<Viesti> viestit = new ArrayList<>();
         while (rs.next()) {
             Integer id = rs.getInt("Aihe");
-        String teksti = rs.getString("Teksti");
-        String nimimerkki = rs.getString("Nimimerkki");
+            String teksti = rs.getString("Teksti");
+            String nimimerkki = rs.getString("Nimimerkki");
+            String paivays = rs.getString("Aika");
 
-            viestit.add(new Viesti(id, teksti, nimimerkki));
+            viestit.add(new Viesti(id, teksti, nimimerkki, paivays));
         }
 
         rs.close();
         stmt.close();
         connection.close();
-
         return viestit;
     }
 

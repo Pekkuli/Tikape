@@ -7,11 +7,11 @@ public class Aihe {
     private String otsikko;
     private String paivays;
 
-    public Aihe(Integer id, Integer viestiMaara, String otsikko) {
+    public Aihe(Integer id, Integer viestiMaara, String otsikko, String paivays) {
         this.id = id;
         this.viestiMaara = viestiMaara;
         this.otsikko = otsikko;
-        this.paivays = "1.1.2017";
+        this.paivays = paivays;
     }
 
     public Integer getId() {
@@ -36,6 +36,14 @@ public class Aihe {
 
     public void setOtsikko(String otsikko) {
         this.otsikko = otsikko;
+    }
+    
+    public String getPaivays(){
+        return paivays;
+    }
+    
+    public void setPaivays(String paivays){
+        this.paivays = paivays;
     }
 
 }

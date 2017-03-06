@@ -23,21 +23,21 @@ public class Main {
             HashMap map = new HashMap<>();
             map.put("alueet", alueDao.findAll());
 
-            return new ModelAndView(map, "index");
+            return new ModelAndView(map, "alueet");
         }, new ThymeleafTemplateEngine());
 
         get("/:alueid", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("aiheet", aiheDao.findAll());
+            map.put("aiheet", aiheDao.findAll(Integer.parseInt(req.params("alueid"))));
 
-            return new ModelAndView(map, "alue");
+            return new ModelAndView(map, "aiheet");
         }, new ThymeleafTemplateEngine());
 
-        get("/:alueid/:aiheid", (req, res) -> {
+        get("/aihe/:aiheid", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("opiskelija", aiheDao.findOne(Integer.parseInt(req.params("aiheid"))));
+            map.put("viestit", viestiDao.findAll(Integer.parseInt(req.params("aiheid"))));
 
-            return new ModelAndView(map, "opiskelija");
+            return new ModelAndView(map, "viestit");
         }, new ThymeleafTemplateEngine());
     }
 }
