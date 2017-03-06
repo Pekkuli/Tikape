@@ -24,7 +24,7 @@ public class ViestiDao implements Dao<Viesti, Integer> {
     @Override
     public Viesti findOne(Integer key) throws SQLException {
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Viesti WHERE Aihe = ?");
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Viesti WHERE Aihe = ?;");
         stmt.setObject(1, key);
 
         ResultSet rs = stmt.executeQuery();
@@ -51,7 +51,7 @@ public class ViestiDao implements Dao<Viesti, Integer> {
     public List<Viesti> findAll(Integer key) throws SQLException {
 
         Connection connection = database.getConnection();
-        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Viesti WHERE Viesti.Aihe = ?");
+        PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Viesti WHERE Viesti.Aihe = ?;");
         stmt.setObject(1, key);
 
         ResultSet rs = stmt.executeQuery();
@@ -69,6 +69,22 @@ public class ViestiDao implements Dao<Viesti, Integer> {
         stmt.close();
         connection.close();
         return viestit;
+    }
+    
+    public void uusiViesti(Integer aiheid, String teksti, String nimimerkki) throws SQLException{
+        if(!teksti.isEmpty()){
+            if(nimimerkki.isEmpty()){
+                nimimerkki = "Anonyymi";
+            }
+            Connection connection = database.getConnection();
+            PreparedStatement stmt = connection.prepareStatement("INSERT INTO Viesti (Aihe, Teksti, Nimimerkki) VALUES (?, ?, ?);");
+            stmt.setObject(1, aiheid);
+            stmt.setObject(2, teksti);
+            stmt.setObject(3, nimimerkki);
+            stmt.executeUpdate();
+            stmt.close();
+            connection.close();
+        }
     }
 
     @Override

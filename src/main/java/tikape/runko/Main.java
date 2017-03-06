@@ -39,5 +39,14 @@ public class Main {
 
             return new ModelAndView(map, "viestit");
         }, new ThymeleafTemplateEngine());
+        
+        post("/aihe/:aiheid", (req, res) -> {
+            viestiDao.uusiViesti(Integer.parseInt(req.params("aiheid")), req.queryParams("viestiTeksti"), req.queryParams("viestiNimimerkki"));
+            
+            HashMap map = new HashMap<>();
+            map.put("viestit", viestiDao.findAll(Integer.parseInt(req.params("aiheid"))));
+
+            return new ModelAndView(map, "viestit");
+        }, new ThymeleafTemplateEngine());
     }
 }
