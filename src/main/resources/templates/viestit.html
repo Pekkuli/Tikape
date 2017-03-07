@@ -5,6 +5,13 @@
         <title>NahkaLuola</title>
         <meta charset="utf-8" />
         <style>
+			div {
+				background-color: lightgrey;
+				width: 600px;
+				border: 25px solid green;
+				padding: 25px;
+				margin: 25px;
+			}
             .laatikko { 
                 float: left;
                 width: 150px;
@@ -30,7 +37,7 @@
     </head>
 
     <body>
-        <h1><span>NahkaKeskustelu!</span></h1>
+        <div><h1><span>NahkaKeskustelu!</span></h1>
 
         <p> <b><span class="laatikko">NahkaViesti</span> <span class="laatikko" th:text="'Nahkamies'">NahkaViesti</span> <span class="laatikko" >P&#228;iv&#228;m&#228;&#228;r&#228;</span></b></p>
 
@@ -41,11 +48,12 @@
         </ul>
         <br/>
         <br/>
+		<p><b>Kirjoita uusi NahkaViesti</b></p>
         <form name="lomake" method="post" onsubmit="return validate()">
             <textarea rows="10" style="margin-top: 10px; margin-bottom: 10px; margin-left: 90px;" name="viestiTeksti"></textarea>
             <br/>
             Nahkamies: <input type="text" name="viestiNimimerkki" />
-            <button type="submit">Lähetä</button>
-        </form>
+            <button type="submit">L&#228;het&#228;</button>
+        </form></div>
     </body>
 </html>

@@ -5,6 +5,13 @@
         <title>NahkaLuola</title>
         <meta charset="utf-8" />
         <style>
+			div {
+				background-color: lightgrey;
+				width: 600px;
+				border: 25px solid green;
+				padding: 25px;
+				margin: 25px;
+			}
             .laatikko { 
                 float: left;
                 width: 150px;
@@ -19,16 +26,18 @@
             }
         </style>
     </head>
-
+	
     <body>
-        <h1>Kaikki NahkaAihealueet!</h1>
+		<div><h1>Tervetuloa NahkaLuolaan!</h1>
+		<p>Suomalainen NahkaFoorumi kaikille nahan yst&#228;ville!</p>
+        <p>Kaikki NahkaAihealueet!</p>
         
-        <p> <span class="laatikko">NahkaAlue</span> <span class="laatikko" th:text="'NahkaViestien m&#228;&#228;r&#228;'">Viestien määrä</span> <span class="laatikko" >Viimeisin NahkaViesti</span></p>
+        <p><b> <span class="laatikko">NahkaAlue</span> <span class="laatikko" th:text="'NahkaViestien m&#228;&#228;r&#228;'">Viestien määrä</span> <span class="laatikko" >Viimeisin NahkaViesti</span></b></p>
 
         <ul style="list-style-type:none">
             <li th:each="alue: ${alueet}">
                 <a th:href="${'/' + alue.id}"> <span class='laatikko' th:text="${alue.otsikko}"></span> </a> <span class='laatikko' th:text="${alue.viestiMaara}">viestien määrä</span> <span class='laatikko' th:text="${alue.paivays}">viestin päivämäärä</span>
             </li>
-        </ul>
+        </ul></div>
     </body>
 </html>
