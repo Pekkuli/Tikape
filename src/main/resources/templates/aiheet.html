@@ -6,11 +6,11 @@
         <meta charset="utf-8" />
         <style>
             div {
-                    background-color: lightgrey;
-                    width: 600px;
-                    border: 25px solid green;
-                    padding: 25px;
-                    margin: 25px;
+                background-color: lightgrey;
+                width: 600px;
+                border: 25px solid green;
+                padding: 25px;
+                margin: 25px;
             }
             .laatikko { 
                 float: left;
@@ -41,7 +41,7 @@
         </script>
     </head>
 
-    <body background="ToF.jpg">
+    <body th:style="'background-image:url('+ @{http://i.imgur.com/OKwDTsH.jpg} +');'">
         <div><h1>Kaikki NahkaAiheet!</h1>
         <p> <b><span class="laatikko">Aihe</span> <span class="laatikko" th:text="'NahkaViestien m&#228;&#228;r&#228;'">NahkaViestien määrä</span> <span class="laatikko" >Viimeisin NahkaViesti</span></b></p>
         <ul style="list-style-type:none">

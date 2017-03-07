@@ -12,7 +12,7 @@ import tikape.runko.domain.Aihe;
 
 public class Main {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception{
         Database database = new Database("jdbc:sqlite:nahkaluola.db");
         database.init();
         
