@@ -13,6 +13,11 @@ import tikape.runko.domain.Aihe;
 public class Main {
 
     public static void main(String[] args) throws Exception{
+		
+        if (System.getenv("PORT") != null) {
+            port(Integer.valueOf(System.getenv("PORT")));
+        }
+		
         Database database = new Database("jdbc:sqlite:nahkaluola.db");
         database.init();
         
