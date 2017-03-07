@@ -38,6 +38,7 @@ public class Main {
             Aihe aihe = aiheDao.uusiAihe(Integer.parseInt(req.params("alueid")), req.queryParams("aiheOtsikko"), req.queryParams("viestiTeksti"), req.queryParams("viestiNimimerkki"));
             
             HashMap map = new HashMap<>();
+            res.redirect("/aihe/" + aihe.getId());
             map.put("viestit", viestiDao.findAll(aihe.getId()));
 
             return new ModelAndView(map, "viestit");

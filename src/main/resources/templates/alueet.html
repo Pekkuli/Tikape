@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
     <head>
-        <title>Nahkaluola</title>
+        <title>NahkaLuola</title>
         <meta charset="utf-8" />
         <style>
             .laatikko { 
@@ -21,9 +21,9 @@
     </head>
 
     <body>
-        <h1>Kaikki Alueet!</h1>
+        <h1>Kaikki NahkaAihealueet!</h1>
         
-        <p> <span class="laatikko">Alue</span> <span class="laatikko" th:text="'Viestien määrä'">Viestien määrä</span> <span class="laatikko" >Viimeisin viesti</span></p>
+        <p> <span class="laatikko">NahkaAlue</span> <span class="laatikko" th:text="'NahkaViestien m&#228;&#228;r&#228;'">Viestien määrä</span> <span class="laatikko" >Viimeisin NahkaViesti</span></p>
 
         <ul style="list-style-type:none">
             <li th:each="alue: ${alueet}">
