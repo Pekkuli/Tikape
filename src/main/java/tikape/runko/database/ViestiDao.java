@@ -72,19 +72,17 @@ public class ViestiDao implements Dao<Viesti, Integer> {
     }
     
     public void uusiViesti(Integer aiheid, String teksti, String nimimerkki) throws SQLException{
-        if(!teksti.isEmpty()){
-            if(nimimerkki.isEmpty()){
-                nimimerkki = "Anonyymi";
-            }
-            Connection connection = database.getConnection();
-            PreparedStatement stmt = connection.prepareStatement("INSERT INTO Viesti (Aihe, Teksti, Nimimerkki) VALUES (?, ?, ?);");
-            stmt.setObject(1, aiheid);
-            stmt.setObject(2, teksti);
-            stmt.setObject(3, nimimerkki);
-            stmt.executeUpdate();
-            stmt.close();
-            connection.close();
+        if(nimimerkki.isEmpty()){
+            nimimerkki = "Anonyymi";
         }
+        Connection connection = database.getConnection();
+        PreparedStatement stmt = connection.prepareStatement("INSERT INTO Viesti (Aihe, Teksti, Nimimerkki) VALUES (?, ?, ?);");
+        stmt.setObject(1, aiheid);
+        stmt.setObject(2, teksti);
+        stmt.setObject(3, nimimerkki);
+        stmt.executeUpdate();
+        stmt.close();
+        connection.close();
     }
 
     @Override

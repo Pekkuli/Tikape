@@ -1,13 +1,26 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package tikape.runko.domain;
 
-public class Opiskelija {
+/**
+ *
+ * @author Sami
+ */
+public class Alue {
 
     private Integer id;
-    private String nimi;
+    private Integer viestiMaara;
+    private String otsikko;
+    private String paivays;
 
-    public Opiskelija(Integer id, String nimi) {
+    public Alue(Integer id, Integer viesteja, String otsikko, String paivays) {
         this.id = id;
-        this.nimi = nimi;
+        this.viestiMaara = viesteja;
+        this.otsikko = otsikko;
+        this.paivays = paivays;
     }
 
     public Integer getId() {
@@ -17,13 +30,29 @@ public class Opiskelija {
     public void setId(Integer id) {
         this.id = id;
     }
-
-    public String getNimi() {
-        return nimi;
+    
+    public Integer getViestiMaara() {
+        return viestiMaara;
     }
 
-    public void setNimi(String nimi) {
-        this.nimi = nimi;
+    public void setViestiMaara(Integer viestiMaara) {
+        this.viestiMaara = viestiMaara;
     }
 
+    public String getOtsikko() {
+        return otsikko;
+    }
+
+    public void setOtsikko(String otsikko) {
+        this.otsikko = otsikko;
+    }
+    
+    public String getPaivays(){
+        return paivays;
+    }
+    
+    public void setPaivays(String paivays){
+        this.paivays = paivays;
+    }
+    
 }

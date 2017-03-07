@@ -18,6 +18,20 @@
                 margin-left: 40px;
             }
         </style>
+        <script>
+            function validate() {
+                var x = document.forms["lomake"]["aiheOtsikko"].value;
+                var y = document.forms["lomake"]["viestiTeksti"].value;
+                if (x == "") {
+                    alert("Otsikko ei voi olla tyhjä");
+                    return false;
+                }
+                if (y == "") {
+                    alert("Viesti ei voi olla tyhjä");
+                    return false;
+                }
+            }
+        </script>
     </head>
 
     <body>
@@ -31,7 +45,7 @@
         <br/>
         <br/>
         <br/>
-        <form method="post">
+        <form name="lomake" method="post" onsubmit="return validate()">
             Otsikko: <input type="text" style="margin-left: 30px;" name="aiheOtsikko" />
             <br/>
             <textarea rows="10" style="margin-top: 10px; margin-bottom: 10px; margin-left: 90px;" name="viestiTeksti"></textarea>
